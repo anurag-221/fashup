@@ -14,17 +14,17 @@ router.post('/register',(req,res)=>{
 
     if(!name || !email || !password)
     {
-        return res.status(422).json({error:'Poora bhar lo chacha'});
+        return res.status(422).json({error:'Please Fill all details'});
     }
        User.findOne({email:email})
        .then((userExist)=>{
            if(userExist){
-            return res.status(422).json({error:'Phli fursat mey nikal'});  
+            return res.status(422).json({error:'Some Error Occured'});  
            }
            const admin = new User({name ,email ,password});
            admin.save().then(()=>{
                res.status(201).json({message:"badhai ho"});
-           }).catch((err)=>res.status(500).json({error:"failed to register"}));
+           }).catch((err)=>res.status(500).json({error:"Failed to register"}));
        }).catch(err =>{console.log(err);});
 });
 
